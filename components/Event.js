@@ -1,11 +1,11 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableOpacity, Text, Button, Alert } from 'react-native';
 import { selectedFriends } from './store/Friends';
 import { connect } from 'react-redux';
-import SelectedFriends from '../components/SelectedFriends'
+import SelectedFriends from '../components/SelectedFriends';
 import { CalendarList } from 'react-native-calendars';
-import { datesAdd, getAllDates } from '../components/store/Dates'
+import { datesAdd, getAllDates } from '../components/store/Dates';
 
 
 
@@ -16,13 +16,30 @@ export class Event extends React.Component {
   }
 
   render() {
+    const friend3 = { key: 'friend3', color: 'teal' };
+    const date = this.props.dates;
 
-    const friend3 = {key: 'friend3', color: 'teal'}
+    const people = this.props.friends.selectedFriends.length + 1
+    const dates = this.props.dates;
+    let arr = [];
+    let answer;
+    Object.keys(dates).map(orders => (
+      Object.keys(dates[orders]).map(day => (
+        arr.push(dates[orders][day].length)
+      ))
+    ));
+    if (arr.includes(people)) {
+      answer = 'Yes!!!';
+    } else {
+      answer = 'Nopee:(';
+    }
 
-    const date = this.props.dates
     return (
       <View>
         <SelectedFriends />
+        <Button
+          title='Check'
+          onPress={() => Alert.alert(answer)} />
         <CalendarList
           markedDates={date}
           markingType={'multi-dot'}

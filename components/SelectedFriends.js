@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { StyleSheet, View, Text, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { selectedFriends } from './store/Friends';
 
@@ -23,13 +23,15 @@ export class SeletedFriends extends React.Component {
       return (
         <View style={styles.friendsContainer}>
           <Text style={styles.header}>Your selected friend(s):</Text>
-          {
-            allSelectedFriends.map(friend => (
-              <View key={friend}>
-                <Text style={styles.friends}>{friend}</Text>
-              </View>
-            ))
-          }
+          <View style={styles.container}>
+            {
+              allSelectedFriends.map(friend => (
+                <View key={friend}>
+                  <Text style={styles.friends}>{friend}</Text>
+                </View>
+              ))
+            }
+          </View>
         </View>
       );
     }
@@ -39,7 +41,8 @@ export class SeletedFriends extends React.Component {
 
 const styles = StyleSheet.create({
   header: {
-    fontSize: 20
+    fontSize: 20,
+    fontFamily: 'AvenirNext-Regular',
   },
   friendsContainer: {
     alignItems: 'center',
@@ -48,10 +51,12 @@ const styles = StyleSheet.create({
   friends: {
     fontSize: 18,
     color: 'teal',
+    fontFamily: 'AvenirNext-Regular',
   },
-  // container: {
-
-  // }
+  container: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
 });
 
 

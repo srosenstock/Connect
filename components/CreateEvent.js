@@ -1,7 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-// import SeletedFriends from '../components/SelectedFriends'
 
 
 export default class CreateEvent extends React.Component {
@@ -13,7 +12,6 @@ export default class CreateEvent extends React.Component {
           onPress={() => this.props.navigation.navigate('AddFriends')}>
           <Text style={styles.friends}>Add Friends</Text>
         </TouchableOpacity>
-        {/* <SeletedFriends /> */}
       </View>
     );
   }

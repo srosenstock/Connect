@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import { selectedFriends } from './store/Friends';
 import { connect } from 'react-redux';
 import SelectedFriends from '../components/SelectedFriends'
@@ -11,26 +11,24 @@ import { datesAdd, getAllDates } from '../components/store/Dates'
 
 export class Event extends React.Component {
   componentDidMount() {
-    this.props.getAllDates()
+    this.props.getAllDates();
     this.props.selectedFriends();
   }
+
   render() {
 
-    const date = this.props
+    const friend3 = {key: 'friend3', color: 'teal'}
+
+    const date = this.props.dates
     return (
       <View>
         <SelectedFriends />
         <CalendarList
-          markedDates={this.props}
+          markedDates={date}
           markingType={'multi-dot'}
-        // onDayPress={(day) => this.props.datesAdd((`${day.year}-${day.day}-${day.month}`: { dots: [friend2, friend3]})) }
+          onDayPress={(day) => this.props.datesAdd((day.dateString), ({ dots: [friend3] }))}
         />
         {
-          console.log('date', date)
-          // Calendar.onDayPress={(day) => { date = (`${day.year}-${day.day}-${day.month}`))}}
-          // CalendarList.markedDates.push({'2020-01-27': { dots: [friend2, friend3]}})
-          // console.log(CalendarList.markedDates)
-          // console.log('dates', dates)
         }
       </View>
     );
@@ -42,13 +40,13 @@ export class Event extends React.Component {
 
 const mapStateToProps = state => ({
   friends: state.friends,
-  dates: state.date
+  dates: state.dates,
 });
 
 const mapDispatchToProps = dispatch => ({
   getAllDates: () => dispatch(getAllDates()),
   selectedFriends: () => dispatch(selectedFriends()),
-  datesAdd: (date) => dispatch(datesAdd(date)),
+  datesAdd: (key, value) => dispatch(datesAdd(key, value)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Event);
